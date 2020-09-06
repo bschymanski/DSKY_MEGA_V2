@@ -26,6 +26,16 @@ int prog_ten = -1;
 int prog_one = -1;
 bool blinkprog = false;
 
+long register_num_1 = 999999;
+long register_num_2 = 999999;
+long register_num_3 = 999999;
+
+// keyboard variables
+volatile int current_key = 0;
+volatile int current_key_int = 0;
+volatile bool gotInterrupt = false;
+volatile bool keypressed = false;
+int old_key = 0;
 
 // 1sec toogle
 bool toggle_timer_1000(void *)

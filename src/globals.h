@@ -71,4 +71,17 @@ const int     progApollo11Audio        = 69;
 const int     progApollo13Audio        = 70;
 const int     progNotUsed              = 100;
 
+
+// Register Values
+extern long register_num_1;
+extern long register_num_2;
+extern long register_num_3;
+
+// keyboard variables
+volatile extern int current_key;
+volatile extern int current_key_int;
+volatile extern bool gotInterrupt;
+volatile extern bool keypressed;
+extern int old_key;
+
 #endif
