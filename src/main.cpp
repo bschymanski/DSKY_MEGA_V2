@@ -54,7 +54,7 @@ void loop()
   long number2 = -9512;
   long number3 = -810302;
   //extern void printRegister(int dregister, long number, bool leadzero, bool blink, bool alarm, bool signoff);
-  printRegister(1, number1, false, false, false, true);
+  printRegister(1, number1, false, true, false, false);
   printRegister(2, number2, false, false, false, true);
   printRegister(3, number3, false, false, false, true);
 }

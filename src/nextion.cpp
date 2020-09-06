@@ -544,7 +544,14 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
         if (signoff == false)
         {
           number = -number;
-          print_REG_MINUS(dregister);
+          if (blink == true && toggle500 == false)
+          {
+            print_REG_SIGNOFF(dregister);
+          }
+          else
+          {
+            print_REG_MINUS(dregister);
+          }
         }
         else if (signoff == true)
         {
@@ -556,7 +563,14 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
     {
         if (signoff == false)
         {
-          print_REG_PLUS(dregister);
+          if (blink == true && toggle500 == false)
+          {
+            print_REG_SIGNOFF(dregister);
+          }
+          else
+          {
+            print_REG_PLUS(dregister);
+          }
         }
         else if (signoff == true)
         {
@@ -570,10 +584,21 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
         
         if (leadzero == true)
         {
-        print_REG_NUM(dregister,5, tenthousand);
-        print_REG_NUM(dregister,4, thousand);
-        print_REG_NUM(dregister,3, hundred);
-        print_REG_NUM(dregister,2, ten);
+          if (blink == true && toggle500 == false)
+          {
+            print_REG_OFF(dregister, 5);
+            print_REG_OFF(dregister, 4);
+            print_REG_OFF(dregister, 3);
+            print_REG_OFF(dregister, 2);
+            print_REG_OFF(dregister, 1);
+          }
+          else
+          {
+            print_REG_NUM(dregister,5, tenthousand);
+            print_REG_NUM(dregister,4, thousand);
+            print_REG_NUM(dregister,3, hundred);
+            print_REG_NUM(dregister,2, ten);
+          }
         }
         else
         {
@@ -589,10 +614,21 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
         one = int(number);
         if (leadzero == true)
         {
-          print_REG_NUM(dregister,5, tenthousand);
-          print_REG_NUM(dregister,4, thousand);
-          print_REG_NUM(dregister,3, hundred);
-          print_REG_NUM(dregister,2, ten);
+          if (blink == true && toggle500 == false)
+          {
+            print_REG_OFF(dregister, 5);
+            print_REG_OFF(dregister, 4);
+            print_REG_OFF(dregister, 3);
+            print_REG_OFF(dregister, 2);
+            print_REG_OFF(dregister, 1);
+          }
+          else
+          {
+            print_REG_NUM(dregister,5, tenthousand);
+            print_REG_NUM(dregister,4, thousand);
+            print_REG_NUM(dregister,3, hundred);
+            print_REG_NUM(dregister,2, ten);
+          }
         }
         else
         {
@@ -601,7 +637,29 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
           print_REG_OFF(dregister, 3);
           print_REG_OFF(dregister, 2);
         }
-        print_REG_NUM(dregister,1, one);
+        if (blink == true && toggle500 == false)
+        {
+          print_REG_OFF(dregister, 5);
+          print_REG_OFF(dregister, 4);
+          print_REG_OFF(dregister, 3);
+          print_REG_OFF(dregister, 2);
+          print_REG_OFF(dregister, 1);
+        }
+        else
+        {
+          if (blink == true && toggle500 == false)
+          {
+            print_REG_OFF(dregister, 5);
+            print_REG_OFF(dregister, 4);
+            print_REG_OFF(dregister, 3);
+            print_REG_OFF(dregister, 2);
+            print_REG_OFF(dregister, 1);
+          }
+          else
+          {
+            print_REG_NUM(dregister,1, one);
+          }
+        }
     }
     else if ((number >= 10) && (number < 100))
     {   
@@ -609,9 +667,20 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
         ten = (number - one) / 10;
         if (leadzero == true)
         {
-          print_REG_NUM(dregister,5, tenthousand);
-          print_REG_NUM(dregister,4, thousand);
-          print_REG_NUM(dregister,3, hundred);
+          if (blink == true && toggle500 == false)
+          {
+            print_REG_OFF(dregister, 5);
+            print_REG_OFF(dregister, 4);
+            print_REG_OFF(dregister, 3);
+            print_REG_OFF(dregister, 2);
+            print_REG_OFF(dregister, 1);
+          }
+          else
+          {
+            print_REG_NUM(dregister,5, tenthousand);
+            print_REG_NUM(dregister,4, thousand);
+            print_REG_NUM(dregister,3, hundred);
+          }
         }
         else
         {
@@ -619,8 +688,19 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
           print_REG_OFF(dregister, 4);
           print_REG_OFF(dregister, 3);
         }
-        print_REG_NUM(dregister,2, ten);
-        print_REG_NUM(dregister,1, one);
+        if (blink == true && toggle500 == false)
+        {
+          print_REG_OFF(dregister, 5);
+          print_REG_OFF(dregister, 4);
+          print_REG_OFF(dregister, 3);
+          print_REG_OFF(dregister, 2);
+          print_REG_OFF(dregister, 1);
+        }
+        else
+        {
+          print_REG_NUM(dregister,2, ten);
+          print_REG_NUM(dregister,1, one);
+        }
     }
     else if ((number >= 100) && (number < 1000))
     {
@@ -629,17 +709,39 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
         hundred = (number / 100) % 10;
         if (leadzero == true)
         {
-          print_REG_NUM(dregister,5, tenthousand);
-          print_REG_NUM(dregister,4, thousand);
+          if (blink == true && toggle500 == false)
+          {
+            print_REG_OFF(dregister, 5);
+            print_REG_OFF(dregister, 4);
+            print_REG_OFF(dregister, 3);
+            print_REG_OFF(dregister, 2);
+            print_REG_OFF(dregister, 1);
+          }
+          else
+          {
+            print_REG_NUM(dregister,5, tenthousand);
+            print_REG_NUM(dregister,4, thousand);
+          }
         }
         else
         {
           print_REG_OFF(dregister, 5);
           print_REG_OFF(dregister, 4);
         }
-        print_REG_NUM(dregister,3, hundred);
-        print_REG_NUM(dregister,2, ten);
-        print_REG_NUM(dregister,1, one);
+        if (blink == true && toggle500 == false)
+        {
+          print_REG_OFF(dregister, 5);
+          print_REG_OFF(dregister, 4);
+          print_REG_OFF(dregister, 3);
+          print_REG_OFF(dregister, 2);
+          print_REG_OFF(dregister, 1);
+        }
+        else
+        {
+          print_REG_NUM(dregister,3, hundred);
+          print_REG_NUM(dregister,2, ten);
+          print_REG_NUM(dregister,1, one);
+        }
     }
     else if ((number >= 1000) && (number < 10000))
     {
@@ -649,16 +751,38 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
         thousand = (number / 1000) % 10;
         if (leadzero == true)
         {
-          print_REG_NUM(dregister,5, tenthousand);
+          if (blink == true && toggle500 == false)
+          {
+            print_REG_OFF(dregister, 5);
+            print_REG_OFF(dregister, 4);
+            print_REG_OFF(dregister, 3);
+            print_REG_OFF(dregister, 2);
+            print_REG_OFF(dregister, 1);
+          }
+          else
+          {
+            print_REG_NUM(dregister,5, tenthousand);
+          }
         }
         else
         {
           print_REG_OFF(dregister, 5);
         }
-        print_REG_NUM(dregister,4, thousand);
-        print_REG_NUM(dregister,3, hundred);
-        print_REG_NUM(dregister,2, ten);
-        print_REG_NUM(dregister,1, one);
+        if (blink == true && toggle500 == false)
+        {
+          print_REG_OFF(dregister, 5);
+          print_REG_OFF(dregister, 4);
+          print_REG_OFF(dregister, 3);
+          print_REG_OFF(dregister, 2);
+          print_REG_OFF(dregister, 1);
+        }
+        else
+        {
+          print_REG_NUM(dregister,4, thousand);
+          print_REG_NUM(dregister,3, hundred);
+          print_REG_NUM(dregister,2, ten);
+          print_REG_NUM(dregister,1, one);
+        }
     }
     else if ((number >= 10000) && (number < 100000))
     {
@@ -667,11 +791,22 @@ void printRegister(int dregister, long number, bool leadzero = true, bool blink 
         hundred = (number / 100) % 10;
         thousand = (number / 1000) % 10;
         tenthousand = (number / 10000) % 10;
-        print_REG_NUM(dregister,5, tenthousand);
-        print_REG_NUM(dregister,4, thousand);
-        print_REG_NUM(dregister,3, hundred);
-        print_REG_NUM(dregister,2, ten);
-        print_REG_NUM(dregister,1, one);
+        if (blink == true && toggle500 == false)
+        {
+          print_REG_OFF(dregister, 5);
+          print_REG_OFF(dregister, 4);
+          print_REG_OFF(dregister, 3);
+          print_REG_OFF(dregister, 2);
+          print_REG_OFF(dregister, 1);
+        }
+        else
+        {
+          print_REG_NUM(dregister,5, tenthousand);
+          print_REG_NUM(dregister,4, thousand);
+          print_REG_NUM(dregister,3, hundred);
+          print_REG_NUM(dregister,2, ten);
+          print_REG_NUM(dregister,1, one);
+        }
     }
     else if ((number >= 100000))
     {
