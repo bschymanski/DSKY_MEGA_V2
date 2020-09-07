@@ -14,16 +14,38 @@ bool global_state_250 = false;
 int verb = verbNone;
 int verb_ten = -1;
 int verb_one = -1;
+int old1_verb = -1;
+int old1_verb_ten = -1;
+int old1_verb_one = -1;
+int old2_verb = -1;
+int old2_verb_ten = -1;
+int old2_verb_one = -1;
+bool verb_valid = false;
+bool verb_error = false;
 bool blinkverb = false;
 
 int noun = nounNone;
 int noun_ten = -1;
 int noun_one = -1;
+int old1_noun = -1;
+int old1_noun_ten = -1;
+int old1_noun_one = -1;
+int old2_noun = -1;
+int old2_noun_ten = -1;
+int old2_noun_one = -1;
+bool noun_valid = false;
+bool noun_error = false;
 bool blinknoun = false;
 
 int prog = progNone;
 int prog_ten = -1;
 int prog_one = -1;
+int old1_prog = -1;
+int old1_prog_ten = -1;
+int old1_prog_one = -1;
+int old2_prog = -1;
+int old2_prog_ten = -1;
+int old2_prog_one = -1;
 bool blinkprog = false;
 
 long register_num_1 = 999999;
@@ -36,6 +58,37 @@ volatile int current_key_int = 0;
 volatile bool gotInterrupt = false;
 volatile bool keypressed = false;
 int old_key = 0;
+
+int progRunning = progNone;
+int actionRuning = actionNone;
+int inputmode = inputIdle;
+
+ProgramStruct ProgramTable[] =
+{
+	/*VerbNumber            NounNumber            action                        ProgramNumber                     Description */
+	{ verbLampTest,         nounNotUsed,          actionLampTest,              progNotUsed                },  /* V35E N--     - Bulb test */
+	{ verbDisplayDecimal,   nounIMUAttitude,      actionDisplayIMUAttitude,    progNotUsed                },  /* V16  N17 E  - Action: IMUAttitude */
+  { verbDisplayDecimal,   nounClockTime,        actionDisplayRealTimeClock,  progNotUsed                },  /* V16  N36 E  - Action: Display Time : actionReadTime()*/
+  { verbDisplayDecimal,   nounLatLongAltitude,  actionDisplayGPS,            progNotUsed                },  /* V16  N43 E  - Action: Display Lattitude / Longitude / Altidue : actionReadGPS() */
+  { verbDisplayDecimal,   nounGPSTime,          actionDisplayGPSTime,        progNotUsed                },  /* V16  N38 E  - Action: Display GPS Time : actionReadGPSTime() */
+  { verbDisplayDecimal,   nounIMUgyro,          actionDisplayIMUGyro,        progNotUsed                },  /* V16  N18 E  - Action: IMUGyro */
+  { verbDisplayDecimal,   nounSelectAudioclip,  actionPlayAudioclip,         progNotUsed                },  /* V16  N98 E   -  Action: Play Selected AudioClip : actionPlaySelectedAudioclip(int clipnum)*/
+  { verbInputProg,        nounClockTime,        actionNone,                  progDispTimeDate           },  /* V37E  36 E    - Program: Display Date / Month / Time : progDispTimeDate()*/ 
+  { verbInputProg,        nounNotUsed,          actionNone,                  progSetDateMan             },  /* V37E  21E*/
+  { verbInputProg,        nounNotUsed,          actionNone,                  progSetTimeGPS             },  /* V37E  22E*/
+  { verbInputProg,        nounNotUsed,          actionNone,                  progSetDateGPS             },  /* V37E  23E*/
+  { verbInputProg,        nounNotUsed,          actionNone,                  progSetDebugEEPROM         },  /* V37E  24E*/
+  { verbInputProg,        nounNotUsed,          actionNone,                  progSetColormodeEEPROM     },  /* V37E  24E*/
+  { verbInputProg,        nounNotUsed,          actionNone,                  progJFKAudio               },  /* V37E  62E*/
+  { verbInputProg,        nounNotUsed,          actionNone,                  progApollo11Audio          },  /* V37E  69E*/
+  { verbInputProg,        nounNotUsed,          actionNone,                  progApollo13Audio          },  /* V37E  70E*/
+  { verbInputNumber,      nounClockTime,        actionSetTime,               progNotUsed                },  /* V21  36E   - Action: Set Time : actionSetTime() */
+  { verbInputNumber,      nounGPSTime,          actionSetGPSTime,            progNotUsed                },  /* V21  38E   - Action: Set GPS Time : actionSetGPSTime() */
+  { verbInputNumber,      nounSelectAudioclip,  actionSelectAudioclip,       progNotUsed                },  /* V21  98E   - Action: Select AudioClip : aactionSelectAudioclip() actionPlaySelectedAudioclip(int clipnum)*/
+  { verbDisplayDecimal,   nounIMUgyro,          actionDisplayIMUGyro,        progNotUsed                }   /* V16E  N18 E - Display IMUGyro */
+};
+
+short NUM_PROG_TABLE_ENTRIES = (sizeof(ProgramTable)/sizeof(ProgramStruct));
 
 // 1sec toogle
 bool toggle_timer_1000(void *)

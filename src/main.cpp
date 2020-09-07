@@ -5,6 +5,8 @@
 #include <neopixel.h>
 #include <nextion.h>
 #include <button_read_int.h>
+#include <inputverb.h>
+#include <inputnoun.h>
 
 // for the toggle variables
 auto timer = timer_create_default();
@@ -20,7 +22,7 @@ void setup()
   timer.every(500, toggle_timer_500);
   timer.every(250, toggle_timer_250);
   NeoPixelSetup();
-  testLamp();
+  //testLamp();
   // nextion Display Init
   Serial1.begin(9600);
   Serial1.print("baud=115200");
@@ -65,5 +67,59 @@ void loop()
   printRegister(2, number2, false, false, false, false);
   printRegister(3, number3, false, false, false, false);
   */
+  // is a Program (major mode) running ?
+  switch (progRunning)
+  {
+    case progNone:
+      // No programm running yet
+      setLamp(yellow, lampProgCond);
+      // is an action running?
+      switch (actionRuning)
+      {
+        case actionNone:
+          //no action is running
+          setLamp(white, lampSTBY);
+          //we wait for an keyboard input
+      }
+      // END is an action running
+      break;
+    default:
+      break;
+  }
+  // END is a Program (major mode) running ?
 
+  // check the key, if one has been pressed:
+  if (keypressed == true) // a key hase been pressed
+  { 
+    switch(current_key) // which key has been pressed?
+    {
+      case keyVerb:
+        inputmode = inputVerb;
+        break;
+      default:
+        break;
+    }
+    // check the input mode (Verb / Noun)
+    switch (inputmode)
+    {
+      case inputIdle:
+        break;
+      case inputVerb:
+        //lightVerblamp(yellow);
+        input_Verb();
+        break;
+      case inputNoun:
+        break;
+    }
+  // END check the input mode (Verb / Noun)
+  old_key = current_key;
+  keypressed = false;
+  }
+  printVerbNounProg(); 
+  // END a key hase been pressed
+
+  
+
+  
+  
 }
