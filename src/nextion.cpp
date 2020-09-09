@@ -66,6 +66,14 @@ void lightNounlamp(int color) // Noun Lamp
       Serial1.print("nounlight.pco=YELLOW");
       nextion_enter(1);
       break;
+    case orange:
+      Serial1.print("nounlight.pco=ORANGE");
+      nextion_enter(1);
+      break;
+    case white:
+      Serial1.print("nounlight.pco=WHITE");
+      nextion_enter(1);
+      break;
     case red:
       Serial1.print("nounlight.pco=RED");
       nextion_enter(1);

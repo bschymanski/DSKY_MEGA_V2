@@ -79,7 +79,12 @@ void loop()
         case actionNone:
           //no action is running
           setLamp(white, lampSTBY);
-          //we wait for an keyboard input
+          break;
+        case actionLampTest:
+          testLamp();
+          actionRuning = actionNone;
+          clearVerbfunction();
+          break;
       }
       // END is an action running
       break;
@@ -109,6 +114,7 @@ void loop()
         input_Verb();
         break;
       case inputNoun:
+        input_Noun();
         break;
     }
   // END check the input mode (Verb / Noun)

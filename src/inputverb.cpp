@@ -77,10 +77,24 @@ void input_Verb()
                     input_Noun();
                     break;
                   case keyEnter:
-                    inputmode = inputNoun;
-                    blinkverb = true;
-                    input_Noun();
-                    printVerbNounProg();
+                      switch (verb)
+                      {
+                        case verbInputProg:
+                        case verbDisplayDecimal:
+                        case verbInputNumber:
+                          inputmode = inputNoun;
+                          if (verb == verbInputProg)
+                          {
+                            blinkverb = true;
+                          }
+                          input_Noun();
+                          printVerbNounProg();
+                          break;
+                        case verbLampTest:
+                          inputmode = inputIdle;
+                          actionRuning = actionLampTest;
+                          break;
+                      }
                     break;
                 }
                 //setLamp(blue, lampVerb);
