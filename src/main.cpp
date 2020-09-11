@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <Wire.h>
 #include <main.h>
 #include <arduino-timer.h>
 #include <globals.h>
@@ -7,6 +8,9 @@
 #include <button_read_int.h>
 #include <inputverb.h>
 #include <inputnoun.h>
+#include <time.h>
+
+
 
 // for the toggle variables
 auto timer = timer_create_default();
@@ -18,6 +22,8 @@ void setup()
   attachInterrupt(digitalPinToInterrupt(commonPin), pressInterrupt, FALLING);
 
   Serial.begin(9600);
+  Wire.begin();
+  void time_setup();
   timer.every(1000, toggle_timer_1000);
   timer.every(500, toggle_timer_500);
   timer.every(250, toggle_timer_250);
@@ -36,6 +42,8 @@ void setup()
   printRegister(1, register_num_1, false, false, false, true);
   printRegister(2, register_num_2, false, false, false, true);
   printRegister(3, register_num_3, false, false, false, true);
+  //display_time();
+
 }
 
 void loop()
@@ -79,6 +87,7 @@ void loop()
         case actionNone:
           //no action is running
           setLamp(white, lampSTBY);
+          display_time();
           break;
         case actionLampTest:
           testLamp();
