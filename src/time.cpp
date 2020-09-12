@@ -7,6 +7,7 @@
 #include <inputnoun.h>
 #include <globals.h>
 #include <time.h>
+#include <math.h>
 
 /*
 #include <Wire.h>
@@ -253,7 +254,25 @@ void display_time()
   int temphour = hour(local_time_t);
   int tempmin = now.minute();
   int tempsec = now.second();
-  
+  int temptemp = round(clock.getTemperature());
+
+  // Temperature
+  if (temptemp >= 28)
+  {
+    setLamp(red, lampTemp);
+  }
+  else if (temptemp >= 26)
+  {
+    setLamp(yellow, lampTemp);
+  }
+  else if (temptemp <= 25)
+  {
+    setLamp(off, lampTemp);
+  }
+  if (temptemp <= 20)
+  {
+    setLamp(blue, lampTemp);
+  }
 
   if (tempday >= 10)
   {
@@ -267,7 +286,8 @@ void display_time()
     print_REG_NUM(1, 5, 0);
     print_REG_NUM(1, 4, tempday);
   }
-
+  // Space between day and month
+  print_REG_OFF(1, 3);
   if (tempmonth >= 10)
   {
   int tempmone = tempmonth % 10;
@@ -283,7 +303,7 @@ void display_time()
 
 
 
-  
+  // Hour and Minute on register 2
   if (temphour >= 10)
   {
   int temphpone = temphour % 10;
@@ -296,7 +316,8 @@ void display_time()
     print_REG_NUM(2, 5, 0);
     print_REG_NUM(2, 4, temphour);
   }
-  
+  // Space between hour and minute
+  print_REG_OFF(2, 3);
   if (tempmin >= 10)
   {
   int tempmpone = tempmin % 10;
@@ -304,11 +325,13 @@ void display_time()
   print_REG_NUM(2, 2, tempmten);
   print_REG_NUM(2, 1, tempmpone);
   }
-  else if (temphour < 10)
+  else if (tempmin < 10)
   {
     print_REG_NUM(2, 2, 0);
     print_REG_NUM(2, 1, tempmin);
   }
+
+
   if (tempsec >= 10)
   {
   int tempsone = tempsec % 10;
@@ -320,6 +343,21 @@ void display_time()
   {
     print_REG_NUM(3, 2, 0);
     print_REG_NUM(3, 1, tempsec);
+  }
+  // Space between day and month
+  print_REG_OFF(3, 3);
+  //temperature
+  if (temptemp >= 10)
+  {
+  int temptone = temptemp % 10;
+  int temptten = (temptemp - temptone) / 10;
+  print_REG_NUM(3, 5, temptten);
+  print_REG_NUM(3, 4, temptone);
+  }
+  else if (temptemp < 10)
+  {
+    print_REG_NUM(3, 5, 0);
+    print_REG_NUM(3, 4, temptemp);
   }
 
 }

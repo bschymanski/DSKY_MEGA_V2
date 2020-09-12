@@ -31,11 +31,13 @@ void setup()
   //testLamp();
   // nextion Display Init
   Serial1.begin(9600);
+  delay(100);
   Serial1.print("baud=115200");
   Serial1.write(0xff);  //Send this three lines after each command sent to the nextion display.
   Serial1.write(0xff);
   Serial1.write(0xff);
   Serial1.end();
+  delay(100);
   Serial1.begin(115200);
   ELtestlamp();
   printVerbNounProg();
