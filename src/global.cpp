@@ -10,6 +10,7 @@ bool toggle250 = false;
 bool global_state_1000 = false;
 bool global_state_500 = false;
 bool global_state_250 = false;
+bool gpsprinttoogle = true;
 
 int verb = verbNone;
 int verb_ten = -1;
@@ -47,6 +48,8 @@ int old2_prog = -1;
 int old2_prog_ten = -1;
 int old2_prog_one = -1;
 bool blinkprog = false;
+bool prog_valid = false;
+bool prog_found = false;
 
 long register_num_1 = 999999;
 long register_num_2 = 999999;
@@ -62,6 +65,9 @@ int old_key = 0;
 int progRunning = progNone;
 int actionRuning = actionNone;
 int inputmode = inputIdle;
+
+bool action_valid = false;
+bool action_found = false;
 
 ProgramStruct ProgramTable[] =
 {

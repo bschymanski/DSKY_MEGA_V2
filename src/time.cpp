@@ -6,6 +6,7 @@
 #include <inputverb.h>
 #include <inputnoun.h>
 #include <globals.h>
+#include <TimeLib.h>
 #include <time.h>
 #include <math.h>
 
@@ -46,10 +47,14 @@ week: First, Second, Third, Fourth, Last
 dow: Sun, Mon, Tue, Wed, Thu, Fri, Sat
 month: Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec
 */
-TimeChangeRule myDST = {"EDT", Last, Sun, Mar, 2, +120};    //Daylight time = UTC + 2 hours
-TimeChangeRule mySTD = {"EST", Last, Sun, Oct, 2, +60};     //Standard time = UTC + 1 hours
+//TimeChangeRule myDST = {"EDT", Last, Sun, Mar, 2, 120};    //Daylight time = UTC + 2 hours
+//TimeChangeRule mySTD = {"EST", Last, Sun, Oct, 3, 60};     //Standard time = UTC + 1 hours
 
-Timezone myTZ(myDST, mySTD);
+TimeChangeRule CEST = {"CEST", Last, Sun, Mar, 2, 120};     // Central European Summer Time
+TimeChangeRule CET = {"CET ", Last, Sun, Oct, 3, 60};       // Central European Standard Time
+Timezone CE(CEST, CET);
+
+//Timezone myTZ(myDST, mySTD);
 
 
 TimeChangeRule* tcr;               //pointer to the time change rule, use to get TZ abbrev
@@ -247,14 +252,19 @@ void display_time()
 
   DateTime now = myRTC.now();
   DateTime now_time_t = myRTC.now();
-  time_t utc_time_t = now_time_t.unixtime();
-  time_t local_time_t = myTZ.toLocal(utc_time_t, &tcr);
+  time_t utc_time_t = now_time_t.unixtime()+3600;
+  time_t local_time_t = CE.toLocal(utc_time_t, &tcr);
   int tempmonth = now.month();
   int tempday = now.day();
   int temphour = hour(local_time_t);
+  //int temphour = hour(clock.getHour(h12Flag, pmFlag));
   int tempmin = now.minute();
   int tempsec = now.second();
   int temptemp = round(clock.getTemperature());
+  
+  // TimeChangeRule CEST = {"CEST", Last, Sun, Mar, 2, 120};     // Central European Summer Time
+  // TimeChangeRule CET = {"CET ", Last, Sun, Oct, 3, 60};       // Central European Standard Time
+  //if ()
 
   // Temperature
   if (temptemp >= 28)

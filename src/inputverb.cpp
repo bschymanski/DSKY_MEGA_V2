@@ -18,9 +18,11 @@ void clearVerbfunction()
   verb_one = -1;
   noun_ten = -1;
   noun_one = -1;
-  actionRuning = actionNone;
+  //actionRuning = actionNone;
   verb_error = false;
   noun_error = false;
+  blinkverb = false;
+  blinknoun = false;
   //clipnum = 1;
   printVerbNounProg();
   
@@ -86,6 +88,7 @@ void input_Verb()
                           if (verb == verbInputProg)
                           {
                             blinkverb = true;
+                            blinknoun = true;
                           }
                           input_Noun();
                           printVerbNounProg();

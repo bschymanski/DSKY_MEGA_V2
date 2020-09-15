@@ -7,7 +7,7 @@
 void(* resetFunc) (void) = 0;//declare reset function at address 0
 
 int commonPin = 3;
-int buttonPins[] = {23,24,25,26,27,44,45,30,31,32,33,34,35,36,37,42,39,40,41};
+int buttonPins[] = {23,24,25,26,27,44,45,30,31,32,33,34,35,46,37,47,39,40,41};
 int numpins = 19;
 
 /*

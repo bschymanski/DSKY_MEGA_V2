@@ -386,6 +386,7 @@ void printVerbNounProg(void) // print Verb / Noun / Prog
   } //  END Print valid noun  
   // Print the noun
 
+
    // Print the prog
   if (prog == progNone) // we don't have a valid prog yet, maybe we have started to enter one? print prog_ten and prog_one if they are bigger than -1
   {
@@ -450,6 +451,17 @@ void printVerbNounProg(void) // print Verb / Noun / Prog
   }
   else if (prog >= 0 && prog < 100) // Print Nalid prog
   {
+    if (prog > 10)
+    {
+      prog_one = prog % 10;
+      prog_ten = (prog - prog_one) / 10;
+    }
+    else if (prog < 10)
+    {
+      prog_ten = 0;
+      prog_one = prog;
+    }
+    
     Serial1.print("P1");
     Serial1.print(".txt=\"");
     if (blinkprog == false)

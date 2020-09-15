@@ -17,6 +17,7 @@ extern bool toggle250;
 extern bool global_state_1000;
 extern bool global_state_500;
 extern bool global_state_250;
+extern bool gpsprinttoogle;
 
 extern bool toggle_timer_1000(void *);
 extern bool toggle_timer_500(void *);
@@ -59,6 +60,8 @@ extern int old1_prog_one;
 extern int old2_prog;
 extern int old2_prog_ten;
 extern int old2_prog_one;
+extern bool prog_valid;
+extern bool prog_found;
 // valid Verbs
 
 const int     verbNone                    = -1;
@@ -116,6 +119,9 @@ const int     inputNoun                = 2;
 extern int progRunning;
 extern int actionRuning;
 extern int inputmode;
+
+extern bool action_valid;
+extern bool action_found;
 
 // Register Values
 extern long register_num_1;
